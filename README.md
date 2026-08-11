@@ -1,36 +1,135 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sakib Hussain A — Portfolio
 
-## Getting Started
+Professional portfolio website built with **Next.js 16 App Router + TypeScript + Tailwind CSS**.
 
-First, run the development server:
+## 🚀 Getting Started
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view it.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ✏️ How to Update Your Portfolio Content
 
-## Learn More
+**All content lives in one file: [`src/data/portfolio.ts`](./src/data/portfolio.ts)**
 
-To learn more about Next.js, take a look at the following resources:
+You never need to touch any component file to update your portfolio.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Add a new project
+Open `src/data/portfolio.ts` and add an object to the `projects` array:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```ts
+{
+  id: "my-new-project",           // unique slug (no spaces)
+  name: "My Awesome Project",
+  description: "What it does...",
+  language: "Python",             // or TypeScript, JavaScript, etc.
+  tags: ["Python", "FastAPI"],    // tech stack badges shown on card
+  stars: 0,                       // update if you have stars
+  githubUrl: "https://github.com/asakibhussain-sketch/my-project",
+  demoUrl: "https://my-project.vercel.app",  // optional — omit if no live demo
+  featured: true,                 // true = large card; false = small card
+}
+```
 
-## Deploy on Vercel
+### Add a new job/internship
+Add to the `experience` array:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```ts
+{
+  id: "company-slug",
+  company: "Company Name",
+  role: "Your Role",
+  type: "Internship",  // or "Full-time", "Part-time", "Freelance"
+  location: "Remote",
+  startDate: "Jan 2027",
+  endDate: "March 2027",  // or "Present"
+  achievements: [
+    "What you did...",
+    "Another achievement...",
+  ],
+}
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Add a certification
+Add to the `certifications` array:
+
+```ts
+{
+  id: "cert-slug",
+  name: "Certification Name",
+  issuer: "Platform / Organization",
+  year: "2027",
+  status: "Completed",  // or "In Progress"
+}
+```
+
+### Update your resume link
+1. Place your PDF in the `public/` folder (e.g. `public/resume.pdf`)
+2. In `portfolio.ts`, uncomment and update:
+   ```ts
+   resumeUrl: "/resume.pdf",
+   ```
+
+---
+
+## 🌐 Deploy to Vercel
+
+Zero-config deployment:
+
+```bash
+npm install -g vercel
+vercel
+```
+
+Or just push to GitHub and connect the repo at [vercel.com/new](https://vercel.com/new).
+
+---
+
+## 🔑 GitHub API Rate Limits
+
+The project currently embeds GitHub data statically in `src/data/portfolio.ts`.
+
+**If you want dynamic GitHub data** (auto-updating stars, READMEs, etc.):
+1. Create a GitHub Personal Access Token (PAT) at [github.com/settings/tokens](https://github.com/settings/tokens) — select **`public_repo`** scope (read-only is fine)
+2. Add it to `.env.local`:
+   ```
+   GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxx
+   ```
+3. Use it in a Server Component or `generateStaticParams` fetch:
+   ```ts
+   fetch("https://api.github.com/users/asakibhussain-sketch/repos", {
+     headers: { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` },
+     next: { revalidate: 3600 }  // ISR — refresh every hour
+   })
+   ```
+
+The **unauthenticated** rate limit is **60 requests/hour** per IP. A PAT raises this to **5,000 requests/hour**.
+
+---
+
+## 🗂 Project Structure
+
+```
+src/
+├── app/
+│   ├── globals.css       # Tailwind + custom tokens
+│   ├── layout.tsx        # Root layout, SEO metadata
+│   └── page.tsx          # Single-page scroll assembly
+├── components/
+│   ├── Navbar.tsx        # Sticky nav with dark mode toggle
+│   ├── Footer.tsx        # Footer with social links
+│   └── sections/
+│       ├── Hero.tsx
+│       ├── About.tsx
+│       ├── Experience.tsx
+│       ├── Projects.tsx
+│       ├── Skills.tsx
+│       ├── Education.tsx
+│       └── Contact.tsx
+└── data/
+    └── portfolio.ts      # ← Edit this file to update content
+```
