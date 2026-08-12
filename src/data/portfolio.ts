@@ -83,7 +83,7 @@ export const profile: Profile = {
   phone: "+91 9844773285",
   github: "https://github.com/asakibhussain-sketch",
   linkedin: "https://linkedin.com/in/sakib-hussain-a-333209316",
-  avatarUrl: "https://avatars.githubusercontent.com/u/275234727?v=4",
+  avatarUrl: "/profile.jpg",
   // resumeUrl: "/resume.pdf",  // Add your resume PDF to public/ and uncomment
 };
 
