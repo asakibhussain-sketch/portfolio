@@ -3,10 +3,10 @@ import { GithubIcon } from "@/components/icons";
 import { projects } from "@/data/portfolio";
 
 const languageColors: Record<string, string> = {
-  TypeScript: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300",
-  JavaScript: "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300",
-  Python: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300",
-  "HTML/Node.js": "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300",
+  TypeScript: "bg-blue-500/15 text-blue-700 dark:text-sky-300 border border-blue-500/25",
+  JavaScript: "bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/25",
+  Python: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/25",
+  "HTML/Node.js": "bg-orange-500/15 text-orange-700 dark:text-orange-300 border border-orange-500/25",
 };
 
 export default function Projects() {
@@ -16,36 +16,37 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="py-20 px-4 sm:px-6 bg-slate-50 dark:bg-slate-900/50"
+      className="py-20 px-4 sm:px-6 relative z-10"
       aria-labelledby="projects-heading"
     >
       <div className="max-w-6xl mx-auto">
         {/* Section header */}
-        <div className="flex items-center gap-3 mb-4">
-          <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
-            <FolderGit2 className="w-5 h-5 text-blue-600 dark:text-blue-400" aria-hidden="true" />
+        <div className="flex items-center gap-3.5 mb-3">
+          <div className="w-10 h-10 rounded-xl liquid-glass-pill flex items-center justify-center text-blue-600 dark:text-sky-400 shadow-sm">
+            <FolderGit2 className="w-5 h-5" aria-hidden="true" />
           </div>
           <div>
-            <p className="text-xs font-semibold text-blue-600 dark:text-blue-400 tracking-widest uppercase mb-0.5">
+            <p className="text-xs font-bold text-blue-600 dark:text-sky-400 tracking-widest uppercase mb-0.5">
               What I&apos;ve built
             </p>
             <h2
               id="projects-heading"
-              className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white"
+              className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white"
             >
-              Projects
+              Featured Projects
             </h2>
           </div>
         </div>
-        <p className="text-sm text-slate-500 dark:text-slate-400 mb-12 ml-0 sm:ml-16">
-          {projects.length} public repositories on{" "}
+
+        <p className="text-sm text-slate-500 dark:text-slate-400 mb-10 ml-0 sm:ml-14">
+          Explore public repositories and deployed AI platforms on{" "}
           <a
             href="https://github.com/asakibhussain-sketch"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-600 dark:text-blue-400 hover:underline"
+            className="text-blue-600 dark:text-sky-400 font-medium hover:underline inline-flex items-center gap-1"
           >
-            GitHub
+            GitHub ↗
           </a>
         </p>
 
@@ -76,37 +77,40 @@ function ProjectCard({
 }) {
   const colorClass =
     languageColors[project.language] ??
-    "bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-300";
+    "bg-slate-500/15 text-slate-700 dark:text-slate-300 border border-slate-500/20";
 
   return (
     <article
-      className={`bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 flex flex-col ${
-        featured ? "p-6" : "p-4"
+      className={`liquid-glass-card rounded-2xl flex flex-col group ${
+        featured ? "p-6 sm:p-7" : "p-5"
       }`}
       aria-label={project.name}
     >
       {/* Header */}
-      <div className="flex items-start justify-between mb-3">
-        <div className="flex items-center gap-2">
-          <FolderGit2
-            className={`text-blue-500 dark:text-blue-400 shrink-0 ${featured ? "w-5 h-5" : "w-4 h-4"}`}
-            aria-hidden="true"
-          />
+      <div className="flex items-start justify-between mb-3.5">
+        <div className="flex items-center gap-2.5 min-w-0">
+          <div className="w-8 h-8 rounded-lg liquid-glass-subtle flex items-center justify-center shrink-0">
+            <FolderGit2
+              className={`text-blue-600 dark:text-sky-400 shrink-0 ${featured ? "w-4.5 h-4.5" : "w-4 h-4"}`}
+              aria-hidden="true"
+            />
+          </div>
           <h3
-            className={`font-bold text-slate-900 dark:text-white leading-tight ${
-              featured ? "text-base" : "text-sm"
+            className={`font-bold text-slate-900 dark:text-white leading-snug truncate ${
+              featured ? "text-base sm:text-lg" : "text-sm"
             }`}
           >
             {project.name}
           </h3>
         </div>
+
         <div className="flex items-center gap-1.5 shrink-0 ml-2">
           {project.demoUrl && (
             <a
               href={project.demoUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-1.5 text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              className="w-8 h-8 rounded-lg liquid-glass-pill flex items-center justify-center text-slate-500 hover:text-blue-600 dark:text-slate-400 dark:hover:text-sky-400 transition-colors"
               aria-label={`Live demo of ${project.name}`}
             >
               <ExternalLink className="w-4 h-4" aria-hidden="true" />
@@ -116,7 +120,7 @@ function ProjectCard({
             href={project.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-1.5 text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
+            className="w-8 h-8 rounded-lg liquid-glass-pill flex items-center justify-center text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors"
             aria-label={`GitHub repository for ${project.name}`}
           >
             <GithubIcon className="w-4 h-4" />
@@ -134,13 +138,13 @@ function ProjectCard({
       </p>
 
       {/* Footer */}
-      <div className="mt-auto space-y-3">
+      <div className="mt-auto space-y-3 pt-3 border-t border-white/40 dark:border-white/5">
         {/* Tags */}
         <div className="flex flex-wrap gap-1.5">
           {project.tags.slice(0, featured ? 5 : 3).map((tag) => (
             <span
               key={tag}
-              className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300"
+              className="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-medium liquid-glass-subtle text-slate-600 dark:text-slate-300"
             >
               {tag}
             </span>
@@ -148,12 +152,12 @@ function ProjectCard({
         </div>
 
         {/* Language + stars */}
-        <div className="flex items-center justify-between">
-          <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${colorClass}`}>
+        <div className="flex items-center justify-between pt-1">
+          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold backdrop-blur-xs ${colorClass}`}>
             {project.language}
           </span>
-          <span className="flex items-center gap-1 text-xs text-slate-400 dark:text-slate-500">
-            <Star className="w-3.5 h-3.5" aria-hidden="true" />
+          <span className="flex items-center gap-1 text-xs font-medium text-slate-500 dark:text-slate-400">
+            <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" aria-hidden="true" />
             {project.stars}
           </span>
         </div>

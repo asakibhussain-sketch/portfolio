@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { Menu, X, Moon, Sun, Brain } from "lucide-react";
-// Github/Linkedin not available in this lucide-react version — using local SVG components
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -19,7 +18,6 @@ export default function Navbar() {
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
-    // Initialize dark mode from localStorage or system preference
     const stored = localStorage.getItem("theme");
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     const isDark = stored === "dark" || (!stored && prefersDark);
@@ -29,7 +27,7 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    const handleScroll = () => setIsScrolled(window.scrollY > 15);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -55,13 +53,17 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-white/90 dark:bg-slate-950/90 backdrop-blur-md shadow-sm border-b border-slate-200 dark:border-slate-800"
-          : "bg-transparent"
+          ? "py-2 sm:py-3 px-3 sm:px-6"
+          : "py-4 px-4 sm:px-8 bg-transparent"
       }`}
       role="banner"
     >
       <nav
-        className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16"
+        className={`max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-14 sm:h-16 transition-all duration-300 ${
+          isScrolled
+            ? "liquid-glass-nav rounded-2xl shadow-lg border border-white/70 dark:border-white/10"
+            : "bg-white/40 dark:bg-slate-900/30 backdrop-blur-md rounded-2xl border border-white/50 dark:border-white/5"
+        }`}
         aria-label="Main navigation"
       >
         {/* Logo */}
@@ -71,21 +73,23 @@ export default function Navbar() {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: "smooth" });
           }}
-          className="flex items-center gap-2 text-slate-900 dark:text-white font-semibold text-lg hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+          className="flex items-center gap-2.5 text-slate-900 dark:text-white font-semibold text-lg group transition-transform duration-200 hover:scale-105"
           aria-label="Home"
         >
-          <Brain className="w-5 h-5 text-blue-600 dark:text-blue-400" aria-hidden="true" />
-          <span className="font-bold">Sakib</span>
-          <span className="text-blue-600 dark:text-blue-400 font-bold">H.</span>
+          <div className="w-8 h-8 rounded-lg bg-blue-500/15 dark:bg-blue-400/15 border border-blue-500/30 dark:border-blue-400/30 flex items-center justify-center backdrop-blur-md shadow-xs group-hover:bg-blue-500/25 transition-colors">
+            <Brain className="w-4 h-4 text-blue-600 dark:text-blue-400" aria-hidden="true" />
+          </div>
+          <span className="font-bold tracking-tight">Sakib</span>
+          <span className="text-blue-600 dark:text-sky-400 font-extrabold -ml-1">H.</span>
         </a>
 
         {/* Desktop links */}
-        <ul className="hidden md:flex items-center gap-1" role="list">
+        <ul className="hidden md:flex items-center gap-1.5" role="list">
           {navLinks.map((link) => (
             <li key={link.href}>
               <button
                 onClick={() => handleNavClick(link.href)}
-                className="px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-slate-800 rounded-md transition-all duration-150"
+                className="px-3.5 py-1.5 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-sky-400 hover:bg-white/60 dark:hover:bg-white/10 rounded-full transition-all duration-200 cursor-pointer backdrop-blur-xs"
               >
                 {link.label}
               </button>
@@ -98,20 +102,20 @@ export default function Navbar() {
           {/* Dark mode toggle */}
           <button
             onClick={toggleDark}
-            className="p-2 rounded-md text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-slate-800 transition-all duration-150"
+            className="w-9 h-9 rounded-full liquid-glass-pill flex items-center justify-center text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-sky-400 cursor-pointer transition-all duration-200"
             aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
           >
             {darkMode ? (
-              <Sun className="w-4 h-4" aria-hidden="true" />
+              <Sun className="w-4 h-4 text-amber-300 animate-in spin-in-90 duration-300" aria-hidden="true" />
             ) : (
-              <Moon className="w-4 h-4" aria-hidden="true" />
+              <Moon className="w-4 h-4 text-slate-700 animate-in spin-in-90 duration-300" aria-hidden="true" />
             )}
           </button>
 
           {/* Mobile menu button */}
           <button
             onClick={() => setMobileOpen((o) => !o)}
-            className="md:hidden p-2 rounded-md text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-slate-800 transition-all duration-150"
+            className="md:hidden w-9 h-9 rounded-full liquid-glass-pill flex items-center justify-center text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-sky-400 cursor-pointer transition-all duration-150"
             aria-expanded={mobileOpen}
             aria-label="Toggle mobile menu"
           >
@@ -127,7 +131,7 @@ export default function Navbar() {
       {/* Mobile menu */}
       {mobileOpen && (
         <div
-          className="md:hidden bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 px-4 py-3 space-y-1"
+          className="md:hidden mt-2 p-3 liquid-glass-card rounded-2xl space-y-1 animate-in fade-in slide-in-from-top-2 duration-200"
           role="menu"
           aria-label="Mobile navigation"
         >
@@ -136,7 +140,7 @@ export default function Navbar() {
               key={link.href}
               onClick={() => handleNavClick(link.href)}
               role="menuitem"
-              className="block w-full text-left px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-slate-800 rounded-md transition-all"
+              className="block w-full text-left px-4 py-2.5 text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-blue-600 dark:hover:text-sky-400 hover:bg-white/60 dark:hover:bg-slate-800/60 rounded-xl transition-all cursor-pointer"
             >
               {link.label}
             </button>

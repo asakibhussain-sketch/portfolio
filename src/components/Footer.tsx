@@ -5,43 +5,43 @@ import { profile } from "@/data/portfolio";
 export default function Footer() {
   return (
     <footer
-      className="border-t border-slate-200 dark:border-slate-800 py-10 px-4 sm:px-6 bg-slate-50 dark:bg-slate-900/50"
+      className="py-12 px-4 sm:px-6 relative z-10 border-t border-white/60 dark:border-white/5 bg-white/30 dark:bg-slate-950/40 backdrop-blur-xl"
       role="contentinfo"
     >
       <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
         {/* Brand */}
         <div className="text-center sm:text-left">
-          <p className="text-sm font-semibold text-slate-900 dark:text-white">
+          <p className="text-base font-bold text-slate-900 dark:text-white">
             {profile.name}
           </p>
-          <p className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
             {profile.title} · {profile.location}
           </p>
         </div>
 
         {/* Social links */}
-        <nav aria-label="Social media links" className="flex items-center gap-3">
+        <nav aria-label="Social media links" className="flex items-center gap-2.5">
           <a
             href={profile.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all"
+            className="w-9 h-9 rounded-xl liquid-glass-pill flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all"
             aria-label="GitHub profile"
           >
-          <GithubIcon className="w-4 h-4" />
+            <GithubIcon className="w-4 h-4" />
           </a>
           <a
             href={profile.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-slate-800 rounded-lg transition-all"
+            className="w-9 h-9 rounded-xl liquid-glass-pill flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-sky-400 transition-all"
             aria-label="LinkedIn profile"
           >
-          <LinkedinIcon className="w-4 h-4" />
+            <LinkedinIcon className="w-4 h-4" />
           </a>
           <a
             href={`mailto:${profile.email}`}
-            className="p-2 text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-slate-800 rounded-lg transition-all"
+            className="w-9 h-9 rounded-xl liquid-glass-pill flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-sky-400 transition-all"
             aria-label="Email"
           >
             <Mail className="w-4 h-4" aria-hidden="true" />
@@ -49,9 +49,10 @@ export default function Footer() {
         </nav>
 
         {/* Copyright */}
-        <p className="text-xs text-slate-400 dark:text-slate-500 flex items-center gap-1">
-          Built with <Heart className="w-3 h-3 text-red-400 fill-red-400" aria-hidden="true" /> by {profile.name.split(" ")[0]} ·{" "}
-          {new Date().getFullYear()}
+        <p className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+          <span>Crafted with</span>
+          <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500 animate-pulse" aria-hidden="true" />
+          <span>by {profile.name.split(" ")[0]} · {new Date().getFullYear()}</span>
         </p>
       </div>
     </footer>

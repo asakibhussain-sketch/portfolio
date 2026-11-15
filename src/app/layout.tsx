@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import LiquidBackground from "@/components/LiquidBackground";
 import "./globals.css";
 
 const inter = Inter({
@@ -59,7 +60,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${inter.variable} scroll-smooth`} suppressHydrationWarning>
-      <body className="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans antialiased transition-colors duration-300">
+      <body className="bg-slate-50/50 dark:bg-[#070b14] text-slate-900 dark:text-slate-100 font-sans antialiased transition-colors duration-500 relative min-h-screen">
+        <LiquidBackground />
         {children}
       </body>
     </html>
