@@ -17,15 +17,6 @@ export default function LiquidBackground() {
       <div className="absolute top-2/3 -left-20 w-[550px] h-[550px] rounded-full bg-gradient-to-tr from-sky-300/25 to-teal-400/20 dark:from-cyan-700/15 dark:to-teal-800/12 blur-[130px] animate-fluid-3" />
 
       <div className="absolute -bottom-32 right-1/4 w-[700px] h-[700px] rounded-full bg-gradient-to-tl from-blue-400/25 to-fuchsia-400/18 dark:from-blue-700/14 dark:to-purple-900/15 blur-[150px] animate-fluid-1" />
-
-      {/* Subtle Specular Refraction Mesh */}
-      <div
-        className="absolute inset-0 opacity-[0.035] dark:opacity-[0.05]"
-        style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)`,
-          backgroundSize: "32px 32px",
-        }}
-      />
     </div>
   );
 }
