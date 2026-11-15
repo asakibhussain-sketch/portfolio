@@ -25,7 +25,11 @@ export interface Experience {
   location: string;
   startDate: string;
   endDate: string;
+  description?: string;
   achievements: string[];
+  certificateImage?: string;
+  certificateId?: string;
+  badges?: string[];
 }
 
 export interface Education {
@@ -67,6 +71,11 @@ export interface Achievement {
   id: string;
   title: string;
   description: string;
+  issuer?: string;
+  date?: string;
+  image?: string;
+  certificateId?: string;
+  badges?: string[];
 }
 
 // ─────────────────────────────────────────────────────────
@@ -88,33 +97,83 @@ export const profile: Profile = {
 };
 
 // ─────────────────────────────────────────────────────────
-// EXPERIENCE
+// EXPERIENCE / INTERNSHIPS
 // ─────────────────────────────────────────────────────────
 export const experience: Experience[] = [
   {
-    id: "internspot",
-    company: "Internspot Innovations",
-    role: "AI Intern",
+    id: "internspot-ai",
+    company: "InternSpot Innovation Pvt Ltd",
+    role: "Artificial Intelligence Intern",
     type: "Internship",
     location: "Remote",
     startDate: "July 2026",
-    endDate: "September 2026",
+    endDate: "August 2026",
+    certificateId: "ISI-COMP-MT1C9CKX-YR5T",
+    certificateImage: "/certificates/internspot-ai.png",
+    badges: ["MSME & AICTE Certified", "AI & ML"],
+    description:
+      "Successfully completed an MSME & AICTE certified internship program in Artificial Intelligence, including comprehensive coursework and end-to-end practical project submissions.",
     achievements: [
-      "Ongoing internship focused on AI coursework and two structured projects (major and minor).",
-      "Working with machine learning pipelines and AI model development under professional mentorship.",
+      "Completed comprehensive AI & ML coursework with dual major and minor project submissions.",
+      "Engineered machine learning pipelines and predictive modeling workflows under professional mentorship.",
+      "Awarded official Internship Completion Certificate verified under AICTE & MSME guidelines.",
     ],
   },
   {
     id: "codealpha",
-    company: "Code Alpha",
+    company: "CodeAlpha",
     role: "Data Science Intern",
     type: "Internship",
     location: "Remote",
-    startDate: "2026",
-    endDate: "2026",
+    startDate: "July 2026",
+    endDate: "July 2026",
+    certificateId: "CA/DF1/180357",
+    certificateImage: "/certificates/codealpha-datascience.png",
+    badges: ["Virtual Internship", "Data Science & ML"],
+    description:
+      "Active participant in the CodeAlpha Virtual Internship Program in Data Science, applying dedication and analytical skills to machine learning workflows and data modeling tasks.",
     achievements: [
-      "Ongoing internship in Data Science with remote course training and two structured projects (major and minor).",
-      "Developed ML models including Iris Flower Classifier (KNN) and Car Price Prediction (Extra Trees Regressor).",
+      "Developed and evaluated ML models including Iris Flower Classifier (KNN) and Car Price Prediction (Extra Trees Regressor).",
+      "Applied end-to-end data pipelines: exploratory data analysis (EDA), data cleaning, feature engineering, and model evaluation metrics.",
+      "Awarded Certificate of Completion recognizing dedicated effort and project delivery (Student ID: CA/DF1/180357).",
+    ],
+  },
+  {
+    id: "codec-tech",
+    company: "Codec Technologies Pvt. Ltd.",
+    role: "Graphic Designing Intern",
+    type: "Internship",
+    location: "Remote",
+    startDate: "September 2026",
+    endDate: "September 2026",
+    certificateId: "CORPORATE6759d549ce59e1733940553",
+    certificateImage: "/certificates/codec-graphic-design.png",
+    badges: ["Google for Education Partner", "AICTE & ICAC Approved"],
+    description:
+      "Completed a 1-month AICTE & ICAC approved Graphic Designing internship program with Google for Education Partner Codec Technologies, focusing on digital aesthetics, visual assets, and UI design principles.",
+    achievements: [
+      "Designed creative digital graphics, brand identity collateral, and user interface visuals following modern design standards.",
+      "Collaborated with project managers and design teams to iterate and refine visual communication concepts.",
+      "Awarded Certificate of Internship approved by AICTE & ICAC (Corporate ID: CORPORATE6759d549ce59e1733940553).",
+    ],
+  },
+  {
+    id: "internspot-training",
+    company: "Internspot",
+    role: "Industrial Training — Applied Technology & AI",
+    type: "Industrial Training",
+    location: "Remote",
+    startDate: "July 2026",
+    endDate: "August 2026",
+    certificateId: "ISI-COMP-MT1C9CKX-YR5T",
+    certificateImage: "/certificates/internspot-industrial-training.png",
+    badges: ["Industry Mentorship", "Performance: Commendable"],
+    description:
+      "Completed a 2-month rigorous Industrial Training program working directly with seasoned industry mentors, earning commendation for technical excellence.",
+    achievements: [
+      "Participated in intensive industrial software training, architecture analysis, and machine learning practical applications.",
+      "Collaborated on real-world engineering problem-solving with continuous mentor evaluation.",
+      "Awarded Certificate of Industrial Training noting commendable performance (ID: ISI-COMP-MT1C9CKX-YR5T).",
     ],
   },
 ];
@@ -313,24 +372,60 @@ export const certifications: Certification[] = [
 // ─────────────────────────────────────────────────────────
 export const achievements: Achievement[] = [
   {
-    id: "mitt-ideathon",
-    title: "4th Place — Ideathon, MITT 2025",
-    description: "Secured 4th place among 50 competing teams.",
+    id: "glowlogics-ambassador",
+    title: "Campus Ambassador — Glow Logics Solutions",
+    issuer: "Glow Logics Solutions · Ministry of MSME, Govt. of India",
+    date: "July – August 2026",
+    image: "/certificates/glowlogics-campus-ambassador.png",
+    badges: ["Campus Ambassador", "Leadership", "MSME Certified"],
+    description:
+      "Awarded Certificate of Campus Ambassador in recognition of excellent initiatives and outstanding contributions during the Campus Ambassador Program representing Maharaja Institute of Technology Thandavapura.",
+  },
+  {
+    id: "internspot-commendation",
+    title: "Industrial Training Commendation — Internspot",
+    issuer: "Internspot",
+    date: "July – August 2026",
+    image: "/certificates/internspot-industrial-training.png",
+    certificateId: "ISI-COMP-MT1C9CKX-YR5T",
+    badges: ["Commendable Performance", "Industry Mentors"],
+    description:
+      "Awarded Certificate of Industrial Training noting commendable performance after completing 2 months of engineering training under direct industry mentorship.",
   },
   {
     id: "national-ideacraft",
     title: "Top 2 — National Ideathon, Ideacraft 2025",
-    description: "Placed in the Top 2 at a national-level Ideathon competition.",
+    issuer: "Ideacraft National Competition",
+    date: "2025",
+    badges: ["National Level", "Top 2 Finalist"],
+    description:
+      "Placed in the Top 2 at a prestigious national-level Ideathon competition, presenting an AI-driven solution among top collegiate participants.",
   },
   {
     id: "hack-mce",
-    title: "Top 2 — Hack.MCE 5.0",
-    description: "Placed in Top 2 at Hack.MCE 5.0 hackathon.",
+    title: "Top 2 — Hack.MCE 5.0 Hackathon",
+    issuer: "Malanad College of Engineering, Hassan",
+    date: "2025",
+    badges: ["Hackathon", "Top 2 Finalist"],
+    description:
+      "Secured Top 2 finish at the Hack.MCE 5.0 hackathon after 24 hours of rapid prototyping, technical problem-solving, and pitching.",
+  },
+  {
+    id: "mitt-ideathon",
+    title: "4th Place — Ideathon, MITT 2025",
+    issuer: "Maharaja Institute of Technology Thandavapura",
+    date: "2025",
+    badges: ["Ideathon", "4th Place / 50 Teams"],
+    description:
+      "Secured 4th place among 50 competing engineering teams with an innovative AI and technology proposal.",
   },
   {
     id: "ideathons",
     title: "Leadership & State-Level Ideathons",
+    issuer: "Multiple State Institutions",
+    date: "2024 – 2025",
+    badges: ["5+ Competitions", "State & National"],
     description:
-      "Participated in five state and national ideathons at MITT Mysore, ATME Mysore, GSSS Mysore, Malanad College of Engineering Hassan, and IBIS Hotel Mysore Maharaja.",
+      "Active participant and team lead in five state and national ideathons at MITT Mysore, ATME Mysore, GSSS Mysore, Malanad College of Engineering Hassan, and IBIS Hotel Mysore Maharaja.",
   },
 ];

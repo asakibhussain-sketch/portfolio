@@ -85,7 +85,8 @@ export default function About() {
                 {[
                   "🏆 Top 2 — National Ideathon 2025",
                   "🥈 4th Place — MITT Ideathon (50 teams)",
-                  "💼 2× Internship (AI + Data Science)",
+                  "💼 3× Internships + Industrial Training",
+                  "🌟 Campus Ambassador (Glow Logics)",
                   "🤖 Federated Learning Researcher",
                 ].map((item) => (
                   <li

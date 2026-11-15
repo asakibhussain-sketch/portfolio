@@ -23,6 +23,7 @@ export default function Navbar() {
     const stored = localStorage.getItem("theme");
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     const isDark = stored === "dark" || (!stored && prefersDark);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setDarkMode(isDark);
     document.documentElement.classList.toggle("dark", isDark);
   }, []);
