@@ -16,12 +16,13 @@ html {
 }
 
 /* ============================================================
-   LIQUID GLASS THEME STYLES & UTILITIES
+   LIQUID GLASS THEME STYLES & DYNAMIC HOVER ANIMATIONS
    Matching both Light & Dark themes with specular reflections
    ============================================================ */
 
-/* Liquid Glass Card Surface */
+/* Liquid Glass Card Surface with dynamic hover elevation */
 .liquid-glass-card {
+  position: relative;
   background: rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -31,15 +32,17 @@ html {
     0 4px 6px -2px rgba(31, 38, 135, 0.03),
     inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.9),
     inset 0 -1px 1px 0 rgba(255, 255, 255, 0.3);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
 }
 
 .liquid-glass-card:hover {
-  background: rgba(255, 255, 255, 0.78);
-  border-color: rgba(59, 130, 246, 0.4);
+  transform: translateY(-6px) scale(1.008);
+  background: rgba(255, 255, 255, 0.82);
+  border-color: rgba(59, 130, 246, 0.5);
   box-shadow: 
-    0 20px 40px -10px rgba(37, 99, 235, 0.12),
-    0 8px 16px -4px rgba(37, 99, 235, 0.05),
+    0 22px 45px -8px rgba(37, 99, 235, 0.18),
+    0 0 25px rgba(56, 189, 248, 0.18),
     inset 0 1.5px 2px 0 rgba(255, 255, 255, 1);
 }
 
@@ -56,12 +59,13 @@ html {
 }
 
 .dark .liquid-glass-card:hover {
-  background: rgba(19, 30, 54, 0.68);
-  border-color: rgba(56, 189, 248, 0.35);
+  transform: translateY(-6px) scale(1.008);
+  background: rgba(19, 30, 54, 0.72);
+  border-color: rgba(56, 189, 248, 0.45);
   box-shadow: 
-    0 20px 45px -10px rgba(56, 189, 248, 0.15),
-    0 8px 20px -4px rgba(0, 0, 0, 0.4),
-    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.25);
+    0 24px 50px -10px rgba(0, 0, 0, 0.75),
+    0 0 35px rgba(56, 189, 248, 0.25),
+    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.28);
 }
 
 /* Subtle Inner Glass Panel */
@@ -71,6 +75,16 @@ html {
   -webkit-backdrop-filter: blur(12px) saturate(160%);
   border: 1px solid rgba(255, 255, 255, 0.6);
   box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.7);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.liquid-glass-subtle:hover {
+  background: rgba(255, 255, 255, 0.75);
+  border-color: rgba(59, 130, 246, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 16px -2px rgba(37, 99, 235, 0.12),
+    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.9);
 }
 
 .dark .liquid-glass-subtle {
@@ -79,6 +93,15 @@ html {
   -webkit-backdrop-filter: blur(12px) saturate(160%);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.dark .liquid-glass-subtle:hover {
+  background: rgba(19, 30, 54, 0.65);
+  border-color: rgba(56, 189, 248, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 18px -2px rgba(56, 189, 248, 0.2),
+    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.2);
 }
 
 /* Liquid Glass Navigation Bar */
@@ -102,7 +125,7 @@ html {
     inset 0 1px 1px 0 rgba(255, 255, 255, 0.12);
 }
 
-/* Liquid Glass Interactive Pill / Badge */
+/* Liquid Glass Interactive Pill / Badge with Hover Lift */
 .liquid-glass-pill {
   background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(12px);
@@ -111,13 +134,17 @@ html {
   box-shadow: 
     0 2px 8px 0 rgba(31, 38, 135, 0.04),
     inset 0 1px 1px 0 rgba(255, 255, 255, 0.8);
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .liquid-glass-pill:hover {
-  background: rgba(255, 255, 255, 0.85);
-  border-color: rgba(59, 130, 246, 0.35);
-  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(59, 130, 246, 0.5);
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 
+    0 8px 20px -2px rgba(37, 99, 235, 0.2),
+    0 0 15px rgba(56, 189, 248, 0.2),
+    inset 0 1px 1.5px 0 rgba(255, 255, 255, 1);
 }
 
 .dark .liquid-glass-pill {
@@ -131,9 +158,13 @@ html {
 }
 
 .dark .liquid-glass-pill:hover {
-  background: rgba(40, 55, 80, 0.65);
-  border-color: rgba(56, 189, 248, 0.4);
-  transform: translateY(-1px);
+  background: rgba(40, 55, 80, 0.75);
+  border-color: rgba(56, 189, 248, 0.5);
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 
+    0 8px 22px -2px rgba(56, 189, 248, 0.28),
+    0 0 18px rgba(56, 189, 248, 0.25),
+    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.25);
 }
 
 /* Primary Liquid Button */
@@ -145,16 +176,20 @@ html {
     0 4px 18px 0 rgba(37, 99, 235, 0.35),
     inset 0 1px 1px 0 rgba(255, 255, 255, 0.4),
     inset 0 -1px 1px 0 rgba(0, 0, 0, 0.2);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .liquid-btn-primary:hover {
   background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 50%, #38bdf8 100%);
   box-shadow: 
-    0 8px 25px 0 rgba(37, 99, 235, 0.5),
-    0 0 15px rgba(56, 189, 248, 0.4),
+    0 12px 30px 0 rgba(37, 99, 235, 0.55),
+    0 0 25px rgba(56, 189, 248, 0.45),
     inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.6);
-  transform: translateY(-2px);
+  transform: translateY(-3px) scale(1.03);
+}
+
+.liquid-btn-primary:active {
+  transform: translateY(0px) scale(0.98);
 }
 
 /* Secondary Liquid Glass Button */
@@ -166,16 +201,17 @@ html {
   box-shadow: 
     0 4px 14px 0 rgba(31, 38, 135, 0.05),
     inset 0 1px 1px 0 rgba(255, 255, 255, 0.9);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .liquid-btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.9);
-  border-color: rgba(59, 130, 246, 0.4);
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(59, 130, 246, 0.5);
   box-shadow: 
-    0 8px 20px 0 rgba(37, 99, 235, 0.12),
+    0 12px 28px 0 rgba(37, 99, 235, 0.2),
+    0 0 18px rgba(56, 189, 248, 0.25),
     inset 0 1px 1.5px 0 rgba(255, 255, 255, 1);
-  transform: translateY(-2px);
+  transform: translateY(-3px) scale(1.03);
 }
 
 .dark .liquid-btn-secondary {
@@ -189,12 +225,17 @@ html {
 }
 
 .dark .liquid-btn-secondary:hover {
-  background: rgba(30, 41, 59, 0.75);
-  border-color: rgba(56, 189, 248, 0.4);
+  background: rgba(30, 41, 59, 0.85);
+  border-color: rgba(56, 189, 248, 0.5);
   box-shadow: 
-    0 8px 25px 0 rgba(56, 189, 248, 0.2),
-    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.25);
-  transform: translateY(-2px);
+    0 12px 30px 0 rgba(56, 189, 248, 0.3),
+    0 0 20px rgba(56, 189, 248, 0.3),
+    inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.3);
+  transform: translateY(-3px) scale(1.03);
+}
+
+.liquid-btn-secondary:active {
+  transform: translateY(0px) scale(0.98);
 }
 
 /* Glass Input & Textarea */
@@ -206,15 +247,20 @@ html {
   box-shadow: 
     inset 0 1px 2px 0 rgba(0, 0, 0, 0.04),
     0 2px 6px 0 rgba(31, 38, 135, 0.02);
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
+}
+
+.liquid-glass-input:hover {
+  background: rgba(255, 255, 255, 0.75);
+  border-color: rgba(59, 130, 246, 0.35);
 }
 
 .liquid-glass-input:focus {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.9);
   border-color: rgba(37, 99, 235, 0.5);
   box-shadow: 
-    0 0 0 3px rgba(37, 99, 235, 0.15),
-    0 4px 12px 0 rgba(37, 99, 235, 0.08);
+    0 0 0 3px rgba(37, 99, 235, 0.18),
+    0 0 15px rgba(56, 189, 248, 0.15);
 }
 
 .dark .liquid-glass-input {
@@ -227,12 +273,17 @@ html {
     0 2px 6px 0 rgba(0, 0, 0, 0.2);
 }
 
+.dark .liquid-glass-input:hover {
+  background: rgba(15, 23, 42, 0.7);
+  border-color: rgba(56, 189, 248, 0.35);
+}
+
 .dark .liquid-glass-input:focus {
-  background: rgba(15, 23, 42, 0.8);
+  background: rgba(15, 23, 42, 0.85);
   border-color: rgba(56, 189, 248, 0.5);
   box-shadow: 
-    0 0 0 3px rgba(56, 189, 248, 0.2),
-    0 4px 16px 0 rgba(56, 189, 248, 0.12);
+    0 0 0 3px rgba(56, 189, 248, 0.25),
+    0 0 20px rgba(56, 189, 248, 0.2);
 }
 
 /* Ambient Fluid Background Blob Animations */
@@ -281,7 +332,7 @@ html {
   animation: fluid-blob-3 26s ease-in-out infinite;
 }
 
-/* Frosted glass certificate container frame */
+/* Frosted glass certificate container frame with dynamic hover */
 .liquid-frame {
   position: relative;
   border-radius: 0.75rem;
@@ -291,12 +342,15 @@ html {
     0 8px 24px -4px rgba(31, 38, 135, 0.08),
     inset 0 1px 1px rgba(255, 255, 255, 0.9);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
 }
 
 .liquid-frame:hover {
-  border-color: rgba(59, 130, 246, 0.5);
+  transform: translateY(-4px) scale(1.02);
+  border-color: rgba(59, 130, 246, 0.6);
   box-shadow: 
-    0 16px 32px -4px rgba(37, 99, 235, 0.16),
+    0 20px 40px -4px rgba(37, 99, 235, 0.25),
+    0 0 25px rgba(56, 189, 248, 0.25),
     inset 0 1px 1px rgba(255, 255, 255, 1);
 }
 
@@ -308,10 +362,12 @@ html {
 }
 
 .dark .liquid-frame:hover {
-  border-color: rgba(56, 189, 248, 0.45);
+  transform: translateY(-4px) scale(1.02);
+  border-color: rgba(56, 189, 248, 0.6);
   box-shadow: 
-    0 16px 36px -4px rgba(56, 189, 248, 0.2),
-    inset 0 1px 1.5px rgba(255, 255, 255, 0.25);
+    0 22px 45px -4px rgba(56, 189, 248, 0.3),
+    0 0 30px rgba(56, 189, 248, 0.3),
+    inset 0 1px 1.5px rgba(255, 255, 255, 0.3);
 }
 
 /* Liquid iridescent text effect */
