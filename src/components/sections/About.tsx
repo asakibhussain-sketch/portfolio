@@ -64,7 +64,6 @@ export default function About() {
                 {[
                   { label: "Degree", value: "B.E. AI & Data Science (2023–2027)" },
                   { label: "University", value: "VTU, Karnataka" },
-                  { label: "Location", value: profile.location },
                   { label: "Languages", value: "English, Hindi & Urdu, Kannada" },
                   { label: "Status", value: "Open to work · Mysore | Hybrid" },
                 ].map(({ label, value }) => (

@@ -393,6 +393,96 @@ export const achievements: Achievement[] = [
       "Awarded Certificate of Industrial Training noting commendable performance after completing 2 months of engineering training under direct industry mentorship.",
   },
   {
+    id: "aws-cloud-practitioner",
+    title: "AWS Academy Cloud Foundations",
+    issuer: "Amazon Web Services (AWS Academy)",
+    date: "2026",
+    image: "/certificates/aws-cloud-practitioner.png",
+    badges: ["AWS Academy", "Cloud Foundations"],
+    description:
+      "Completed the AWS Academy Cloud Foundations course, gaining foundational knowledge of cloud computing concepts, AWS core services, security, architecture, pricing, and support.",
+  },
+  {
+    id: "mitt-pals-ial",
+    title: "MITT PALS IAL 2 — Part Recognition",
+    issuer: "Maharaja Institute of Technology Thandavapura",
+    date: "2026",
+    image: "/certificates/mitt-pals-ial.png",
+    badges: ["PALS", "MITT Certified"],
+    description:
+      "Recognized for successful completion of the PALS IAL 2 Part program at Maharaja Institute of Technology Thandavapura, demonstrating academic achievement and participation.",
+  },
+  {
+    id: "python-cert",
+    title: "Python Programming Certification",
+    issuer: "Infosys Springboard",
+    date: "2023",
+    image: "/certificates/python-cert.png",
+    badges: ["Python", "Infosys Springboard"],
+    description:
+      "Earned certification in Python Programming from Infosys Springboard, covering core Python syntax, data structures, OOP principles, and practical scripting skills.",
+  },
+  {
+    id: "skillup-ai",
+    title: "Artificial Intelligence Fundamentals",
+    issuer: "IBM SkillsBuild",
+    date: "2026",
+    image: "/certificates/skillup-ai.png",
+    badges: ["IBM SkillsBuild", "AI Fundamentals"],
+    description:
+      "Completed IBM SkillsBuild's Artificial Intelligence Fundamentals course, covering foundational AI concepts, machine learning basics, neural networks, and real-world AI applications.",
+  },
+  {
+    id: "skillup-microsoft",
+    title: "Microsoft Office Productivity",
+    issuer: "IBM SkillsBuild · Microsoft",
+    date: "2026",
+    image: "/certificates/skillup-microsoft.png",
+    badges: ["Microsoft", "IBM SkillsBuild"],
+    description:
+      "Certified in Microsoft Office productivity tools through IBM SkillsBuild, demonstrating proficiency in Word, Excel, PowerPoint, and cloud-based collaboration tools.",
+  },
+  {
+    id: "coursera-ml",
+    title: "Machine Learning — Introduction for Everyone",
+    issuer: "IBM · Coursera",
+    date: "2026",
+    image: "/certificates/coursera-ml.png",
+    badges: ["IBM", "Coursera", "Machine Learning"],
+    description:
+      "Completed IBM's Machine Learning Introduction course on Coursera, covering supervised and unsupervised learning, regression, classification, clustering, and model evaluation.",
+  },
+  {
+    id: "coursera-nlp",
+    title: "Fundamentals of Natural Language Processing",
+    issuer: "Coursera",
+    date: "2026",
+    image: "/certificates/coursera-nlp.png",
+    badges: ["NLP", "Coursera"],
+    description:
+      "Earned certification in NLP Fundamentals on Coursera, learning text preprocessing, sentiment analysis, word embeddings, sequence models, and transformer-based language models.",
+  },
+  {
+    id: "skillup-genai",
+    title: "Generative AI Fundamentals",
+    issuer: "IBM SkillsBuild",
+    date: "2026",
+    image: "/certificates/skillup-genai.png",
+    badges: ["Generative AI", "IBM SkillsBuild"],
+    description:
+      "Completed IBM SkillsBuild's Generative AI Fundamentals course, exploring large language models, prompt engineering, diffusion models, and responsible AI practices.",
+  },
+  {
+    id: "coursera-sna",
+    title: "Social Network Analysis",
+    issuer: "Coursera",
+    date: "2026",
+    image: "/certificates/coursera-sna.png",
+    badges: ["Network Analysis", "Coursera"],
+    description:
+      "Certified in Social Network Analysis on Coursera, studying graph theory, centrality measures, community detection, information diffusion, and network visualization techniques.",
+  },
+  {
     id: "national-ideacraft",
     title: "Top 2 — National Ideathon, Ideacraft 2025",
     issuer: "Ideacraft National Competition",
