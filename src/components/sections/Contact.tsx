@@ -1,51 +1,104 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, MapPin, Send, CheckCircle2 } from "lucide-react";
+import { Mail, MapPin, Send, CheckCircle2, Loader2, ExternalLink } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/icons";
 import { profile } from "@/data/portfolio";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
       setError("Please fill in all fields.");
       return;
     }
-    const mailtoUrl = `mailto:${profile.email}?subject=Portfolio Enquiry from ${encodeURIComponent(form.name)}&body=${encodeURIComponent(form.message + "\n\nFrom: " + form.email)}`;
-    window.location.href = mailtoUrl;
-    setSubmitted(true);
+
+    setLoading(true);
     setError("");
+
+    try {
+      // Send directly to asakibhussain@gmail.com via FormSubmit AJAX API
+      const res = await fetch(`https://formsubmit.co/ajax/${profile.email}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name: form.name.trim(),
+          email: form.email.trim(),
+          message: form.message.trim(),
+          _subject: `Portfolio Message from ${form.name.trim()}`,
+          _template: "table",
+        }),
+      });
+
+      if (res.ok) {
+        setSubmitted(true);
+        setForm({ name: "", email: "", message: "" });
+      } else {
+        // Fallback to opening Gmail directly in browser
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+          profile.email
+        )}&su=${encodeURIComponent("Portfolio Message from " + form.name)}&body=${encodeURIComponent(
+          form.message + "\n\nFrom: " + form.email
+        )}`;
+        window.open(gmailUrl, "_blank");
+        setSubmitted(true);
+      }
+    } catch {
+      // Network/adblocker fallback: open Gmail web compose
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+        profile.email
+      )}&su=${encodeURIComponent("Portfolio Message from " + form.name)}&body=${encodeURIComponent(
+        form.message + "\n\nFrom: " + form.email
+      )}`;
+      window.open(gmailUrl, "_blank");
+      setSubmitted(true);
+    } finally {
+      setLoading(false);
+    }
   };
+
+  const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+    profile.email
+  )}&su=${encodeURIComponent("Portfolio Connection Request")}&body=${encodeURIComponent(
+    "Hi Sakib,\n\nI came across your portfolio and would love to connect."
+  )}`;
 
   const contactLinks = [
     {
       icon: <Mail className="w-5 h-5 text-blue-600 dark:text-sky-400" aria-hidden="true" />,
-      label: "Email",
+      label: "Gmail",
       value: profile.email,
       href: `mailto:${profile.email}`,
+      actionLabel: "Email directly",
     },
     {
       icon: <GithubIcon className="w-5 h-5 text-slate-700 dark:text-slate-300" />,
       label: "GitHub",
       value: "asakibhussain-sketch",
       href: profile.github,
+      actionLabel: "View profile",
     },
     {
       icon: <LinkedinIcon className="w-5 h-5 text-blue-600 dark:text-sky-400" />,
       label: "LinkedIn",
       value: "Sakib Hussain A",
       href: profile.linkedin,
+      actionLabel: "Connect",
     },
     {
       icon: <MapPin className="w-5 h-5 text-rose-500" aria-hidden="true" />,
       label: "Location",
       value: profile.location,
       href: "https://maps.google.com/?q=Mysore,Karnataka,India",
+      actionLabel: "Map view",
     },
   ];
 
@@ -69,7 +122,7 @@ export default function Contact() {
               id="contact-heading"
               className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white"
             >
-              Contact Me
+              Connect with Me
             </h2>
           </div>
         </div>
@@ -79,7 +132,10 @@ export default function Contact() {
           <div className="md:col-span-2 space-y-6">
             <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
               I&apos;m open to internship opportunities, AI/ML research collaborations, and freelance
-              data science projects. Feel free to reach out!
+              data science projects. Messages sent here deliver straight to{" "}
+              <strong className="text-blue-600 dark:text-sky-400 font-semibold">
+                {profile.email}
+              </strong>.
             </p>
 
             <ul className="space-y-3.5" role="list">
@@ -87,12 +143,12 @@ export default function Contact() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    target={link.label !== "Email" && link.label !== "Location" ? "_blank" : undefined}
+                    target={link.label !== "Location" ? "_blank" : undefined}
                     rel="noopener noreferrer"
                     className="flex items-center gap-3.5 p-3 rounded-2xl liquid-glass-card hover:translate-x-1 transition-all group cursor-pointer"
                     aria-label={`${link.label}: ${link.value}`}
                   >
-                    <span className="w-10 h-10 rounded-xl liquid-glass-subtle flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                    <span className="w-10 h-10 rounded-xl liquid-glass-subtle flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                       {link.icon}
                     </span>
                     <div className="min-w-0">
@@ -107,28 +163,45 @@ export default function Contact() {
                 </li>
               ))}
             </ul>
+
+            {/* Quick Gmail Web Compose Button */}
+            <div className="pt-2">
+              <a
+                href={gmailComposeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl liquid-glass-pill text-xs font-bold text-blue-600 dark:text-sky-400 hover:text-blue-700 dark:hover:text-sky-300 transition-all cursor-pointer shadow-xs"
+              >
+                <Mail className="w-4 h-4" />
+                <span>Open directly in Gmail Web</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            </div>
           </div>
 
           {/* Contact form */}
           <div className="md:col-span-3">
             <div className="liquid-glass-card rounded-2xl p-6 sm:p-8">
               {submitted ? (
-                <div className="flex flex-col items-center justify-center py-10 gap-4 text-center">
+                <div className="flex flex-col items-center justify-center py-10 gap-4 text-center animate-in fade-in duration-300">
                   <div className="w-16 h-16 rounded-full liquid-glass-subtle flex items-center justify-center shadow-lg">
                     <CheckCircle2 className="w-9 h-9 text-emerald-500" aria-hidden="true" />
                   </div>
                   <h3 className="text-xl font-bold text-slate-900 dark:text-white">
-                    Message Prepared!
+                    Message Sent to Gmail!
                   </h3>
-                  <p className="text-sm text-slate-600 dark:text-slate-300 max-w-sm">
-                    Your default email client should have opened. If not, you can reach me directly at{" "}
-                    <a href={`mailto:${profile.email}`} className="text-blue-600 dark:text-sky-400 font-semibold underline">
+                  <p className="text-sm text-slate-600 dark:text-slate-300 max-w-sm leading-relaxed">
+                    Thank you! Your message has been sent directly to{" "}
+                    <span className="font-semibold text-blue-600 dark:text-sky-400">
                       {profile.email}
-                    </a>.
+                    </span>. I will review and reply to you as soon as possible.
                   </p>
                   <button
-                    onClick={() => { setSubmitted(false); setForm({ name: "", email: "", message: "" }); }}
-                    className="mt-2 text-sm text-blue-600 dark:text-sky-400 font-semibold hover:underline cursor-pointer"
+                    onClick={() => {
+                      setSubmitted(false);
+                      setForm({ name: "", email: "", message: "" });
+                    }}
+                    className="mt-3 px-5 py-2 rounded-xl liquid-glass-pill text-xs font-bold text-blue-600 dark:text-sky-400 hover:text-blue-700 dark:hover:text-sky-300 cursor-pointer transition-all"
                   >
                     Send another message
                   </button>
@@ -155,7 +228,8 @@ export default function Contact() {
                       placeholder="John Doe"
                       required
                       autoComplete="name"
-                      className="w-full px-4 py-3 text-sm liquid-glass-input rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none"
+                      disabled={loading}
+                      className="w-full px-4 py-3 text-sm liquid-glass-input rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none disabled:opacity-50"
                     />
                   </div>
 
@@ -174,7 +248,8 @@ export default function Contact() {
                       placeholder="you@example.com"
                       required
                       autoComplete="email"
-                      className="w-full px-4 py-3 text-sm liquid-glass-input rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none"
+                      disabled={loading}
+                      className="w-full px-4 py-3 text-sm liquid-glass-input rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none disabled:opacity-50"
                     />
                   </div>
 
@@ -192,7 +267,8 @@ export default function Contact() {
                       onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
                       placeholder="Hi Sakib, I'd love to connect regarding..."
                       required
-                      className="w-full px-4 py-3 text-sm liquid-glass-input rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none resize-y"
+                      disabled={loading}
+                      className="w-full px-4 py-3 text-sm liquid-glass-input rounded-xl text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none resize-y disabled:opacity-50"
                     />
                   </div>
 
@@ -204,10 +280,20 @@ export default function Contact() {
 
                   <button
                     type="submit"
-                    className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 liquid-btn-primary font-bold text-sm rounded-xl cursor-pointer"
+                    disabled={loading}
+                    className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 liquid-btn-primary font-bold text-sm rounded-xl cursor-pointer disabled:opacity-70"
                   >
-                    <Send className="w-4 h-4" aria-hidden="true" />
-                    Send Message
+                    {loading ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>Sending to Gmail...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4" aria-hidden="true" />
+                        <span>Send Message</span>
+                      </>
+                    )}
                   </button>
                 </form>
               )}
